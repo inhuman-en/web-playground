@@ -1,2 +1,6 @@
 @import '~normalize.css/normalize.css';
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import './theme.scss';
+
+.mat-menu-item {
+    font-size: 14px;
+}

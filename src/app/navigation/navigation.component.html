@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar color="primary" >
     <mat-menu #angular="matMenu"
               yPosition="below"
               xPosition="after"
@@ -24,4 +24,11 @@
     </a>
     <a mat-button [matMenuTriggerFor]="node">Node
     </a>
+    <button mat-raised-button>
+        Theme test
+    </button>
+    <span class="fill-space"></span>
+    <mat-form-field class="app-search">
+    	<input matInput type="search" placeholder="Search">
+    </mat-form-field>
 </mat-toolbar>
