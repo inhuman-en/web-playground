@@ -1,0 +1,27 @@
+<mat-toolbar>
+    <mat-menu #angular="matMenu"
+              yPosition="below"
+              xPosition="after"
+              overlapTrigger="false">
+        <button mat-menu-item>Feature 1</button>
+        <button mat-menu-item>Feature 2</button>
+        <button mat-menu-item>Feature 3</button>
+    </mat-menu>
+    <mat-menu #node="matMenu"
+              yPosition="below"
+              xPosition="after"
+              overlapTrigger="false">
+        <button mat-menu-item>Feature 1</button>
+        <button mat-menu-item>Feature 2</button>
+        <button mat-menu-item>Feature 3</button>
+    </mat-menu>
+    <a mat-icon-button href="/">
+        <mat-icon>
+            explore
+        </mat-icon>
+    </a>
+    <a mat-button [matMenuTriggerFor]="angular">Angular
+    </a>
+    <a mat-button [matMenuTriggerFor]="node">Node
+    </a>
+</mat-toolbar>
