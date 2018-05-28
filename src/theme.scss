@@ -9,8 +9,9 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://www.google.com/design/spec/style/color.html
-$wpl-default-primary: mat-palette($mat-teal);
-$wpl-default-accent: mat-palette($mat-amber, A200, A100, A400);
+
+$wpl-default-primary: mat-palette($mat-blue-gray,  200, 100, 300);
+$wpl-default-accent: mat-palette($mat-teal, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $wpl-default-warn: mat-palette($mat-orange);
