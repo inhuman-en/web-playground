@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" >
+<mat-toolbar color="primary">
     <mat-menu #angular="matMenu"
               yPosition="below"
               xPosition="after"
@@ -15,20 +15,49 @@
         <button mat-menu-item>Feature 2</button>
         <button mat-menu-item>Feature 3</button>
     </mat-menu>
-    <a mat-icon-button href="/">
+    <a mat-icon-button routerLink="./">
         <mat-icon>
             explore
         </mat-icon>
     </a>
-    <a mat-button [matMenuTriggerFor]="angular">Angular
+    <a mat-button
+       [matMenuTriggerFor]="angular">Angular
     </a>
-    <a mat-button [matMenuTriggerFor]="node">Node
+    <a mat-button
+       [matMenuTriggerFor]="node">Node
     </a>
     <button mat-raised-button>
         Theme test
     </button>
     <span class="fill-space"></span>
     <mat-form-field class="app-search">
-    	<input matInput type="search" placeholder="Search">
+        <input matInput
+               type="search"
+               placeholder="Search">
     </mat-form-field>
+    <div class="navigation__auth">
+        <ng-container *ngIf="!authService.authenticated else autheticatedBlock">
+            <span class="fill-space"></span>
+            <a mat-button routerLink="./login">
+                <mat-icon>
+                    perm_identity
+                </mat-icon>
+                Log In
+            </a>
+        </ng-container>
+        <ng-template #autheticatedBlock>
+            <a mat-button routerLink="./account">
+                <mat-icon>
+                    perm_identity
+                </mat-icon>
+                Account
+            </a>
+            <a mat-button routerLink="./logout">
+                <mat-icon>
+                    exit_to_app
+                </mat-icon>
+                Logout
+            </a>
+        </ng-template>
+    </div>
 </mat-toolbar>

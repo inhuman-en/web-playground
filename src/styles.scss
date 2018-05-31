@@ -5,10 +5,8 @@
 @include mat-core();
 // @include mat-icon-theme();
 
-body {
-    -webkit-link: black;
-}
-
-.mat-menu-item {
+.mat-menu-item,
+.mat-toolbar,
+mat-form-field input {
     font-size: 14px;
 }

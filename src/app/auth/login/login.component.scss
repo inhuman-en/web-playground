@@ -1,0 +1,18 @@
+.login-form {
+    margin: 0 auto;
+    width: 350px;
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    &__submit-wrap {
+        text-align: center;
+    }
+
+    // mat-form-field {
+    //     width: 100%;
+    // }
+}
