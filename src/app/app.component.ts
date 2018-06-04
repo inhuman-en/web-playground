@@ -1,4 +1,5 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { MatSidenav } from './shared';
 
 @Component({
     selector: 'wpl-root',
@@ -8,4 +9,12 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class AppComponent {
 
+    @ViewChild('sidenav')
+    sidenav: MatSidenav;
+
+    sidenavOpened = false;
+
+    onSidenavOpened() {
+        this.sidenav.toggle();
+    }
 }

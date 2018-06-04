@@ -1,16 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../auth';
+import { MatSidenav } from '../shared';
 
 @Component({
-  selector: 'wpl-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+    selector: 'wpl-navigation',
+    templateUrl: './navigation.component.html',
+    styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+    @Output()
+    sidenavOpened: EventEmitter<void> = new EventEmitter<void>();
 
-  ngOnInit() {
-  }
+    constructor(private authService: AuthService) {}
 
+    ngOnInit() {}
+
+    onSidenavButtonClick() {
+        this.sidenavOpened.emit();
+    }
 }

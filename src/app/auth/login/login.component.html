@@ -2,11 +2,7 @@
     <form (ngSubmit)="onSubmit()"
           #loginForm="ngForm"
           class="login-form__form">
-        <mat-card-title class="sign-in">Sign in</mat-card-title>
-
-        <mat-card-subtitle class="sign-up">Don't have an account?
-            <a routerLink="/signup">Sign up</a>
-        </mat-card-subtitle>
+        <mat-card-title>Sign in</mat-card-title>
         <mat-form-field>
             <input matInput
                    required
@@ -24,9 +20,11 @@
                    [(ngModel)]="user.password">
         </mat-form-field>
 
-        <div class="login-form__submit-wrap">
-            <button mat-raised-button
-                    type="submit">Sign in</button>
+        <div class="login-form__form__signup-hint" >
+            Don't have an account?
+                <a routerLink="/signup">Sign up</a>
         </div>
+        <button mat-raised-button color="primary"
+                    type="submit">Sign in</button>
     </form>
 </mat-card>

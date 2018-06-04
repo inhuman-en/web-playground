@@ -1,4 +1,21 @@
-wpl-navigation {
-    display: block;
-    margin-bottom: 40px;
+.wpl-app {
+    height: 100vh;
+
+    &__sidenav {
+        width: 250px;
+
+    }
+
+    wpl-navigation {
+        display: block;
+        margin-bottom: 40px;
+    }
+
+
+}
+
+@media(max-width:599px) {
+    .wpl-app__sidenav {
+        width: 100vw;
+    }
 }

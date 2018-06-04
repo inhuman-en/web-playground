@@ -10,14 +10,14 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://www.google.com/design/spec/style/color.html
 
-$wpl-default-primary: mat-palette($mat-blue-gray,  200, 100, 300);
-$wpl-default-accent: mat-palette($mat-teal, A200, A100, A400);
+$wpl-default-primary: mat-palette($mat-light-blue,  800);
+$wpl-default-accent: mat-palette($mat-light-blue, 700);
 
 // The warn palette is optional (defaults to red).
-$wpl-default-warn: mat-palette($mat-orange);
+// $wpl-default-warn: mat-palette($mat-orange);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$wpl-default-theme: mat-light-theme($wpl-default-primary, $wpl-default-accent, $wpl-default-warn);
+$wpl-default-theme: mat-light-theme($wpl-default-primary, $wpl-default-accent);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
