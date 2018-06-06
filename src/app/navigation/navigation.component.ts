@@ -1,6 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { AuthService } from '../auth';
-import { MatSidenav } from '../shared';
+import { MainmenuComponent } from './mainmenu';
 
 @Component({
     selector: 'wpl-navigation',
@@ -8,10 +8,11 @@ import { MatSidenav } from '../shared';
     styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent implements OnInit {
+    @ViewChild('mainmenu') mainmenu: MainmenuComponent;
 
     ngOnInit() {}
 
     onSidenavOpened() {
-        console.log('toggling sidenav');
+        this.mainmenu.toggleSidenav();
     }
 }

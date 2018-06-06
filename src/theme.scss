@@ -10,7 +10,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://www.google.com/design/spec/style/color.html
 
-$wpl-default-primary: mat-palette($mat-light-blue,  800);
+$wpl-default-primary: mat-palette($mat-blue-gray,  700);
 $wpl-default-accent: mat-palette($mat-light-blue, 700);
 
 // The warn palette is optional (defaults to red).

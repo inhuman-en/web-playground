@@ -1,8 +1,48 @@
-.fill-space {
-    flex: 1 1 auto;
-}
-
 .header {
+    &__toolbar {
+
+        .fill-space {
+            flex: 1 1 auto;
+        }
+
+        &.mat-toolbar-single-row {
+            height: 48px;
+            padding-left: 0;
+        }
+
+        &__logo {
+            &.mat-button {
+                &:hover {
+                    .mat-button-focus-overlay {
+                        opacity: 0;
+                    }
+                }
+            }
+
+        }
+
+        &__sidenav-button {
+            &.mat-icon-button {
+                margin-left: 98px;
+            }
+        }
+
+        &__account-button-icon {
+            &.mat-icon {
+                height: 18px;
+                width: 18px;
+                font-size: 1.1rem
+            }
+        }
+
+        &__account-menu {
+            width: 152px;
+            position: relative;
+            top: 6px;
+            right: 6px;
+        }
+    }
+
     &__auth {
         width: 240px;
         display: flex;

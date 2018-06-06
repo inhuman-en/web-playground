@@ -1,48 +1,94 @@
 <mat-sidenav-container class="main-menu">
     <mat-sidenav class="main-menu__sidenav"
+                 [class.main-menu__sidenav__expanded]="sidenavExpanded"
                  mode="side"
                  opened="true">
-        <mat-nav-list>
+        <mat-nav-list class="main-menu__sidenav__list">
+            <h4 mat-subheader>
+                <ng-container *ngIf="sidenavExpanded else headerCollapsed">
+                    Features
+                </ng-container>
+            </h4>
+            <ng-template #headerCollapsed>
+                <mat-icon mat-list-icon>
+                    more_horiz
+                </mat-icon>
+            </ng-template>
             <mat-list-item>
-                <a>
-                    <mat-icon>
+                <a mat-line
+                   class="main-menu__sidenav__item-text">
+                    <mat-icon mat-list-icon>
                         perm_identity
                     </mat-icon>
-                    Angular
+                    <span *ngIf="sidenavExpanded">Angular</span>
                 </a>
             </mat-list-item>
             <mat-list-item>
-                <a>
-                    <mat-icon>
+                <a mat-line
+                   class="main-menu__sidenav__item-text">
+                    <mat-icon mat-list-icon>
                         perm_identity
                     </mat-icon>
-                    Node
+                    <span *ngIf="sidenavExpanded">Angular</span>
                 </a>
             </mat-list-item>
             <mat-list-item>
-                <a>
-                    <mat-icon>
+                <a mat-line
+                   class="main-menu__sidenav__item-text">
+                    <mat-icon mat-list-icon>
                         perm_identity
                     </mat-icon>
-                    Menu item
+                    <span *ngIf="sidenavExpanded">Angular</span>
                 </a>
             </mat-list-item>
             <mat-list-item>
-                <a>
-                    <mat-icon>
+                <a mat-line
+                   class="main-menu__sidenav__item-text">
+                    <mat-icon mat-list-icon>
                         perm_identity
                     </mat-icon>
-                    Menu item
+                    <span *ngIf="sidenavExpanded">Angular</span>
                 </a>
             </mat-list-item>
             <mat-list-item>
-                <a>
-                    <mat-icon>
+                <a mat-line
+                   class="main-menu__sidenav__item-text">
+                    <mat-icon mat-list-icon>
                         perm_identity
                     </mat-icon>
-                    Menu item
+                    <span *ngIf="sidenavExpanded">Angular</span>
                 </a>
             </mat-list-item>
+
+            <mat-list-item>
+                <a mat-line
+                   class="main-menu__sidenav__item-text">
+                    <mat-icon mat-list-icon>
+                        perm_identity
+                    </mat-icon>
+                    <span *ngIf="sidenavExpanded">Angular</span>
+                </a>
+            </mat-list-item>
+            <h4 mat-subheader>
+                    <ng-container *ngIf="sidenavExpanded else headerCollapsed">
+                        Features
+                    </ng-container>
+                </h4>
+                <ng-template #headerCollapsed>
+                    <mat-icon mat-list-icon>
+                        more_horiz
+                    </mat-icon>
+                </ng-template>
+                <mat-list-item>
+                    <a mat-line
+                       class="main-menu__sidenav__item-text">
+                        <mat-icon mat-list-icon>
+                            perm_identity
+                        </mat-icon>
+                        <span *ngIf="sidenavExpanded">Angular</span>
+                    </a>
+                </mat-list-item>
+
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>

@@ -1,13 +1,32 @@
 .main-menu {
     &__sidenav {
-        width: 250px;
+        width: 50px;
+        overflow-x: hidden;
+
+        &__list.mat-nav-list {
+
+            .mat-subheader {
+                padding: 14px;
+            }
+
+            .mat-list-item .mat-list-item-content {
+                padding: 0 8px 0 8px;
+
+                a {
+                    display: flex;
+                    align-items: center;
+                    .mat-list-icon {
+                        padding-right: 12px;
+                    }
+                }
+
+            }
+        }
+
+        &__expanded {
+            width: 250px;
+        }
     }
 
     height: calc(100vh - 64px);
-}
-
-@media(max-width:599px) {
-    .main-menu__sidenav {
-        width: 100vw;
-    }
 }

@@ -1,21 +1,23 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="header__toolbar">
     <mat-menu #accountMenu="matMenu"
               yPosition="below"
               xPosition="after"
-              overlapTrigger="false">
+              overlapTrigger="false"
+              class="header__toolbar__account-menu">
         <button mat-menu-item>My Profile</button>
         <button mat-menu-item>Settings</button>
         <button mat-menu-item>Logout</button>
     </mat-menu>
     <a mat-button
-       routerLink="./">
+       routerLink="./"
+       class="header__toolbar__logo">
         <mat-icon>
             explore
         </mat-icon>
         AppName
     </a>
     <a mat-icon-button
-       class="header__sidenav-button"
+       class="header__toolbar__sidenav-button"
        (click)="onSidenavButtonClick()">
         <mat-icon>
             menu
@@ -23,21 +25,26 @@
     </a>
     <span class="fill-space"></span>
     <ng-container *ngIf="!authService.authenticated else autheticatedBlock">
-        <a mat-button
-           routerLink="./login">
+        <a mat-button>
             <mat-icon>
                 perm_identity
             </mat-icon>
             Log In
+            <mat-icon class="header__toolbar__account-button-icon">
+                keyboard_arrow_down
+            </mat-icon>
         </a>
     </ng-container>
     <ng-template #autheticatedBlock>
         <a mat-button
            [matMenuTriggerFor]="accountMenu">
             <mat-icon>
-                perm_identity
+                account_circle
             </mat-icon>
-            Account
+            Username
+            <mat-icon class="header__toolbar__account-button-icon">
+                keyboard_arrow_down
+            </mat-icon>
         </a>
     </ng-template>
 </mat-toolbar>

@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'wpl-mainmenu',
-  templateUrl: './mainmenu.component.html',
-  styleUrls: ['./mainmenu.component.scss']
+    selector: 'wpl-mainmenu',
+    templateUrl: './mainmenu.component.html',
+    styleUrls: ['./mainmenu.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class MainmenuComponent implements OnInit {
 
-  constructor() { }
+    sidenavExpanded = true;
 
-  ngOnInit() {
-  }
+    constructor() {}
 
+    ngOnInit() {}
+
+    toggleSidenav() {
+        this.sidenavExpanded = !this.sidenavExpanded;
+    }
 }
