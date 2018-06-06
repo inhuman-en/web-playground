@@ -1,0 +1,13 @@
+.main-menu {
+    &__sidenav {
+        width: 250px;
+    }
+
+    height: calc(100vh - 64px);
+}
+
+@media(max-width:599px) {
+    .main-menu__sidenav {
+        width: 100vw;
+    }
+}

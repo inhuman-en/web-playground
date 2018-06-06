@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { SharedModule } from '../shared';
 
-const routes: Routes = [{ path: 'login', component: LoginComponent }];
+const routes: Routes = [];
 
 @NgModule({
     imports: [CommonModule, SharedModule, FormsModule, RouterModule.forChild(routes)],

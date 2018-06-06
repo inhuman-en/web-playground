@@ -1,0 +1,43 @@
+<mat-toolbar color="primary">
+    <mat-menu #accountMenu="matMenu"
+              yPosition="below"
+              xPosition="after"
+              overlapTrigger="false">
+        <button mat-menu-item>My Profile</button>
+        <button mat-menu-item>Settings</button>
+        <button mat-menu-item>Logout</button>
+    </mat-menu>
+    <a mat-button
+       routerLink="./">
+        <mat-icon>
+            explore
+        </mat-icon>
+        AppName
+    </a>
+    <a mat-icon-button
+       class="header__sidenav-button"
+       (click)="onSidenavButtonClick()">
+        <mat-icon>
+            menu
+        </mat-icon>
+    </a>
+    <span class="fill-space"></span>
+    <ng-container *ngIf="!authService.authenticated else autheticatedBlock">
+        <a mat-button
+           routerLink="./login">
+            <mat-icon>
+                perm_identity
+            </mat-icon>
+            Log In
+        </a>
+    </ng-container>
+    <ng-template #autheticatedBlock>
+        <a mat-button
+           [matMenuTriggerFor]="accountMenu">
+            <mat-icon>
+                perm_identity
+            </mat-icon>
+            Account
+        </a>
+    </ng-template>
+</mat-toolbar>

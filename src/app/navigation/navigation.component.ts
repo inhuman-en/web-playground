@@ -9,14 +9,9 @@ import { MatSidenav } from '../shared';
 })
 export class NavigationComponent implements OnInit {
 
-    @Output()
-    sidenavOpened: EventEmitter<void> = new EventEmitter<void>();
-
-    constructor(private authService: AuthService) {}
-
     ngOnInit() {}
 
-    onSidenavButtonClick() {
-        this.sidenavOpened.emit();
+    onSidenavOpened() {
+        console.log('toggling sidenav');
     }
 }

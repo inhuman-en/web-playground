@@ -8,13 +8,4 @@ import { MatSidenav } from './shared';
     encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-
-    @ViewChild('sidenav')
-    sidenav: MatSidenav;
-
-    sidenavOpened = false;
-
-    onSidenavOpened() {
-        this.sidenav.toggle();
-    }
 }
