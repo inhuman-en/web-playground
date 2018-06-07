@@ -48,3 +48,13 @@
         display: flex;
     }
 }
+
+.login-panel {
+    position: absolute !important;
+    top: 50px;
+    right: 15px;
+
+    .mat-dialog-container {
+        padding: 0;
+    }
+}

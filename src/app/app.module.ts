@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { CoreModule } from './core';
+import { AuthModule } from './auth';
 import { NavigationModule } from './navigation';
 import { SharedModule } from './shared';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -13,7 +14,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [CoreModule, NavigationModule, SharedModule, DashboardModule, AppRoutingModule],
+    imports: [CoreModule, NavigationModule, SharedModule, DashboardModule, AuthModule, AppRoutingModule],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

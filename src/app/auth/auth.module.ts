@@ -19,5 +19,6 @@ const routes: Routes = [];
     ],
     declarations: [LoginComponent],
     exports: [RouterModule, LoginComponent],
+    entryComponents: [LoginComponent]
 })
 export class AuthModule {}

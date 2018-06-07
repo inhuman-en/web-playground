@@ -9,8 +9,7 @@ import {
     MatCardModule,
     MatSidenavModule,
     MatListModule,
-
-    MatSidenav
+    MatDialogModule
 } from '@angular/material';
 
 const COMPONENT_MODULES = [
@@ -22,7 +21,8 @@ const COMPONENT_MODULES = [
     MatFormFieldModule,
     MatCardModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatDialogModule
 ];
 
 @NgModule({

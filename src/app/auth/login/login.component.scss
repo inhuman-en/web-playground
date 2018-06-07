@@ -1,6 +1,9 @@
 .login-form {
-    margin: 0 auto;
-    width: 350px;
+    width: 250px;
+
+    &__google-btn {
+        margin-bottom: 20px;
+    }
 
     &__form {
         display: flex;
