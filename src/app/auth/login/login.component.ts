@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef } from '../../material';
+import { of } from 'rxjs';
+import { catchError} from 'rxjs/operators';
 
 import { User } from '../user';
 import { AuthService } from '../auth.service';
@@ -38,15 +40,19 @@ export class LoginComponent implements OnInit {
         console.log(this.auth.uid);
         this.auth
             .login(this.user)
-            .then(() => {
+            .pipe(
+                catchError((err) => {
+                    console.warn(`failed to authenticate ${username}: ${err.message}`);
+                    this.errorMessage = err.message;
+                    this.loginInProcess = false;
+
+                    return of(null);
+                })
+            )
+            .subscribe(() => {
                 console.info(`${username} successfully logged in!`);
                 this.dialogRef.close();
                 // TODO: success svg animation
-            })
-            .catch((err) => {
-                console.warn(`failed to authenticate ${username}: ${err.message}`);
-                this.errorMessage = err.message;
-                this.loginInProcess = false;
             });
     }
 }

@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
+import { catchError} from 'rxjs/operators';
 
 import { User } from './user';
 
@@ -8,7 +11,7 @@ export class AuthService {
     authenticated: Boolean = false;
     redirectTo: String = '/';
     uid: Number;
-    constructor(private router: Router) {
+    constructor(private router: Router, private http: HttpClient) {
         this.uid = Math.random();
     }
 
@@ -17,6 +20,18 @@ export class AuthService {
     login(user: User) {
         console.log(`trying to login: ${user.username}, ${user.password}`);
 
+        return this.http.post<User>(`/auth/signin`, user)
+            .pipe(
+                // () => {
+                //     this.authenticated = true;
+                //     return of(null);
+                // },
+                catchError((err) => of({
+                    message: 'Incorrect login or password'
+                }))
+            );
+
+            /*
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 if (user.username === this.validUser.username && user.password === this.validUser.password) {
@@ -25,11 +40,12 @@ export class AuthService {
                     resolve();
                 } else {
                     reject({
-                        message: 'incorrect login or password'
+                        message: 'Incorrect login or password'
                     });
                 }
             }, 1000);
         });
+        */
     }
 
     logout() {
