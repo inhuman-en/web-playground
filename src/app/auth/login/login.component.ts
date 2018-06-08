@@ -40,19 +40,16 @@ export class LoginComponent implements OnInit {
         console.log(this.auth.uid);
         this.auth
             .login(this.user)
-            .pipe(
-                catchError((err) => {
-                    console.warn(`failed to authenticate ${username}: ${err.message}`);
-                    this.errorMessage = err.message;
+            .subscribe((d) => {
+                console.info(`${username} successfully logged in!`, d);
+                this.dialogRef.close();
+                // TODO: success svg animation
+            }, (error) => {
+                console.warn(`failed to authenticate ${username}: ${error.message}`);
+                    this.errorMessage = error.message;
                     this.loginInProcess = false;
 
                     return of(null);
-                })
-            )
-            .subscribe(() => {
-                console.info(`${username} successfully logged in!`);
-                this.dialogRef.close();
-                // TODO: success svg animation
             });
     }
 }

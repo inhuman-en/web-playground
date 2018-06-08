@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
-import { catchError} from 'rxjs/operators';
+import { of, throwError } from 'rxjs';
+import { catchError, tap} from 'rxjs/operators';
 
 import { User } from './user';
 
 @Injectable()
 export class AuthService {
     authenticated: Boolean = false;
+    // TODO: separate models for user and userInfo
+    userDisplayMame = null;
     redirectTo: String = '/';
     uid: Number;
     constructor(private router: Router, private http: HttpClient) {
@@ -22,30 +24,16 @@ export class AuthService {
 
         return this.http.post<User>(`/auth/signin`, user)
             .pipe(
-                // () => {
-                //     this.authenticated = true;
-                //     return of(null);
-                // },
-                catchError((err) => of({
-                    message: 'Incorrect login or password'
-                }))
-            );
-
-            /*
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                if (user.username === this.validUser.username && user.password === this.validUser.password) {
+                catchError((response) => {
+                    this.authenticated = false;
+                    return throwError(response.error);
+                }),
+                tap((userData) => {
                     this.authenticated = true;
-                    this.router.navigate([this.redirectTo]);
-                    resolve();
-                } else {
-                    reject({
-                        message: 'Incorrect login or password'
-                    });
-                }
-            }, 1000);
-        });
-        */
+                    this.userDisplayMame = userData.username;
+                    return of(userData);
+                })
+            );
     }
 
     logout() {

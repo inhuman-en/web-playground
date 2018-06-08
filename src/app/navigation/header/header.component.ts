@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
 
     loginVisible = false;
 
-    constructor(private authService: AuthService, private dialogService: MatDialog) {}
+    constructor(public authService: AuthService, private dialogService: MatDialog) {}
 
     ngOnInit() {}
 
