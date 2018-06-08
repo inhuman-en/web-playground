@@ -1,31 +1,44 @@
+<div *ngIf="loginInProcess" class="login-form__spinner">
+    <mat-spinner></mat-spinner>
+</div>
 <mat-card class="login-form">
-    <form (ngSubmit)="onSubmit()"
-          #loginForm="ngForm"
+    <form #loginForm="ngForm"
           class="login-form__form">
-        <mat-card-title>Sign in</mat-card-title>
-        <button mat-raised-button class="login-form__google-btn"> <img src="assets/google_logo.png" alt="Google logo"> Sign in with Google</button>
+        <button mat-raised-button
+                class="login-form__google-btn"
+                (click)="googleLogin()">
+            <img src="assets/google_logo.png"
+                 alt="Google logo"> Sign in with Google</button>
+        <mat-error *ngIf="errorMessage"
+                   class="error-message login-form__error-message">
+            {{errorMessage}}
+        </mat-error>
         <mat-form-field>
             <input matInput
                    required
                    placeholder="Username"
                    name="username"
+                   autocomplete="username"
                    [(ngModel)]="user.username">
         </mat-form-field>
-
         <mat-form-field>
             <input matInput
                    required
                    type="password"
                    placeholder="Password"
                    name="password"
+                   autocomplete="current-password"
                    [(ngModel)]="user.password">
         </mat-form-field>
-
-        <div class="login-form__form__signup-hint" >
+        <div class="login-form__form__signup-hint">
             Don't have an account?
-                <a routerLink="/signup">Sign up</a>
+            <a routerLink="/signup">Sign up</a>
         </div>
-        <button mat-raised-button color="primary"
-                    type="submit">Sign in</button>
+        <button mat-raised-button
+                color="primary"
+                type="submit"
+                [disabled]="loginForm.invalid"
+                (click)="localLogin()"
+                >Sign in</button>
     </form>
 </mat-card>

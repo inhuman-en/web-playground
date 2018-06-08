@@ -30,10 +30,11 @@ export class HeaderComponent implements OnInit {
 
         this.loginVisible = true;
 
-        // TODO: add events from form (success/failure)
         const dialogRef = this.dialogService.open(LoginComponent, {
             hasBackdrop: false,
             panelClass: 'login-panel'
         });
+
+        dialogRef.afterClosed().subscribe(() => this.loginVisible = false);
     }
 }

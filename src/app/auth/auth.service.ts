@@ -18,13 +18,17 @@ export class AuthService {
         console.log(`trying to login: ${user.username}, ${user.password}`);
 
         return new Promise((resolve, reject) => {
-            if (user.username === this.validUser.username && user.password === this.validUser.password) {
-                this.authenticated = true;
-                this.router.navigate([this.redirectTo]);
-                resolve();
-            } else {
-                reject();
-            }
+            setTimeout(() => {
+                if (user.username === this.validUser.username && user.password === this.validUser.password) {
+                    this.authenticated = true;
+                    this.router.navigate([this.redirectTo]);
+                    resolve();
+                } else {
+                    reject({
+                        message: 'incorrect login or password'
+                    });
+                }
+            }, 1000);
         });
     }
 
