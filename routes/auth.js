@@ -13,9 +13,7 @@ router.post('/signin', function(req, res, next) {
                 if (err) {
                     return next(err);
                 }
-                return res.json({
-                    username: user.username
-                });
+                return res.json(user);
             });
         } else {
             res.status(401);

@@ -28,13 +28,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function(user, done) {
-    console.log('serialize', user);
     done(null, user.username);
 });
 
 passport.deserializeUser(function(username, done) {
-    console.log('serialize', username);
-    done(null, { username: 'admin', password: '1' });
+    User.findOne({username}, function(err, user) {
+        done(err, user);
+    });
 });
 
 passport.use(local);
