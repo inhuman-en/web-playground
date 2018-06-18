@@ -1,4 +1,7 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+import { MatDialogRef } from '../../material';
+import { of } from 'rxjs';
+import { catchError} from 'rxjs/operators';
 
 import { User } from '../user';
 import { AuthService } from '../auth.service';
@@ -10,17 +13,43 @@ import { AuthService } from '../auth.service';
     encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent implements OnInit {
-    user = new User();
+    @Output() loginSuccess: EventEmitter<string> = new EventEmitter<string>();
 
-    constructor(public auth: AuthService) {}
+    user = new User();
+    errorMessage: string;
+    loginInProcess = false;
+
+    constructor(
+        public auth: AuthService,
+        // TODO: separate form from dialog
+        public dialogRef: MatDialogRef<LoginComponent>
+    ) {}
 
     ngOnInit() {}
 
-    onSubmit() {
+    googleLogin() {
+        console.log('oauth');
+    }
+
+    localLogin() {
+        const username: string = this.user.username;
+
+        this.errorMessage = null;
+        this.loginInProcess = true;
+
         console.log(this.auth.uid);
         this.auth
             .login(this.user)
-            .then(() => console.info(`${this.user.username} successfully logged in!`))
-            .catch(() => console.warn(`failed to authenticate ${this.user.username}`));
+            .subscribe((d) => {
+                console.info(`${username} successfully logged in!`, d);
+                this.dialogRef.close();
+                // TODO: success svg animation
+            }, (error) => {
+                console.warn(`failed to authenticate ${username}: ${error.message}`);
+                    this.errorMessage = error.message;
+                    this.loginInProcess = false;
+
+                    return of(null);
+            });
     }
 }

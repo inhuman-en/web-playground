@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
 
     loginVisible = false;
 
-    constructor(private authService: AuthService, private dialogService: MatDialog) {}
+    constructor(public authService: AuthService, private dialogService: MatDialog) {}
 
     ngOnInit() {}
 
@@ -30,10 +30,11 @@ export class HeaderComponent implements OnInit {
 
         this.loginVisible = true;
 
-        // TODO: add events from form (success/failure)
         const dialogRef = this.dialogService.open(LoginComponent, {
             hasBackdrop: false,
             panelClass: 'login-panel'
         });
+
+        dialogRef.afterClosed().subscribe(() => this.loginVisible = false);
     }
 }
