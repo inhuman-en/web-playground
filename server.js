@@ -30,7 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 db.init();
-authconfig.init();
+authconfig.init(passport);
 
 app.use('/auth', authRouter);
 

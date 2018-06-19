@@ -7,12 +7,9 @@ let fakeUsers = [
     { username: 'jack', password: 'pwd2' }
 ].map(user => {
     const salt = bcrypt.genSaltSync(8);
+    const hash = bcrypt.hashSync(user.password, salt, null);
 
-    return {
-        ...user,
-        salt,
-        hash: bcrypt.hashSync(user.password, salt, null)
-    };
+    return { ...user, salt, hash };
 });
 
 User.remove({}, function(err) {
