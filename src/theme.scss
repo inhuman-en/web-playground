@@ -1,4 +1,5 @@
 @import '~@angular/material/theming';
+@import 'app/navigation/mainmenu/mainmenu.component.theme.scss';
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -11,7 +12,7 @@
 // hue. Available color palettes: https://www.google.com/design/spec/style/color.html
 
 $wpl-default-primary: mat-palette($mat-blue-gray,  700);
-$wpl-default-accent: mat-palette($mat-light-blue, 700);
+$wpl-default-accent: mat-palette($mat-teal, 400);
 
 // The warn palette is optional (defaults to red).
 // $wpl-default-warn: mat-palette($mat-orange);
@@ -23,3 +24,4 @@ $wpl-default-theme: mat-light-theme($wpl-default-primary, $wpl-default-accent);
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($wpl-default-theme);
+@include mainmenu-theme($wpl-default-theme);

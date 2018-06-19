@@ -1,0 +1,40 @@
+@import '~@angular/material/theming';
+
+@mixin mainmenu-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $foreground: map-get($theme, foreground);
+    $textColor: #ffffff;
+    $backgroundSelected: mat-color($accent);
+
+    .main-menu {
+        &__sidenav {
+            background: darken($color: mat-color($primary), $amount: 8);
+
+            .mat-nav-list .mat-list-item {
+                color: darken($color: $textColor, $amount: 12);
+                transition: color 200ms ease-in, background 200ms ease-in;
+
+                &:hover {
+                    color: $textColor;
+                    background: darken($color: mat-color($primary), $amount: 12);
+                }
+            }
+
+            & .mat-nav-list &__item-selected {
+                background: $backgroundSelected;
+                color: $textColor;
+
+                &:hover {
+                    color: $textColor;
+                    background: $backgroundSelected;
+                }
+            }
+
+            .mat-subheader {
+                color: darken($color: $textColor, $amount: 24)
+            }
+        }
+    }
+}
