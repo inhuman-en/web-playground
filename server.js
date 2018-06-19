@@ -7,6 +7,7 @@ var logger = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
 
+const cfg = require('./serverconfig');
 const authconfig = require('./authconfig');
 const db = require('./db');
 
@@ -23,7 +24,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ secret: 'azzz', resave: false, saveUninitialized: false }));
+app.use(session({ secret: cfg.SESSION_SECRET, resave: false, saveUninitialized: false }));
 
 app.use(passport.initialize());
 app.use(passport.session());

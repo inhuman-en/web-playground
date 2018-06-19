@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+const cfg = require('../serverconfig');
 // TODO: connection string as an env variable
 module.exports = function() {
     mongoose.connect(
-        'mongodb://localhost:27017/wpl',
+        cfg.DB_CONNECTION_STRING,
         {},
         function(err) {
             if (err) {
