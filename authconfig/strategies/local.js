@@ -10,9 +10,10 @@ module.exports = new LocalStrategy(function(username, password, done) {
         if (!user) {
             return done(null, false, { message: 'Incorrect login or password' });
         }
-        // if (!user.validPassword(password)) {
-        //     return done(null, false, { message: 'Incorrect login or password' });
-        // }
+
+        if (!user.validPassword(password)) {
+            return done(null, false, { message: 'Incorrect login or password' });
+        }
 
         console.log(`authenticating ${username} successful`, user);
 

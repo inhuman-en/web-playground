@@ -15,11 +15,11 @@ UserSchema.methods.generateSalt = function() {
 };
 
 UserSchema.methods.generateHash = function(password) {
-    return bcrypt.hashSync(password, this.salt, null);
+    return bcrypt.hashSync(password, this.local.salt, null);
 };
 
 UserSchema.methods.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.local.password);
+    return bcrypt.compareSync(password, this.local.hash);
 };
 
 module.exports = mongoose.model('User', UserSchema);

@@ -9,7 +9,7 @@ let fakeUsers = [
     const salt = bcrypt.genSaltSync(8);
     const hash = bcrypt.hashSync(user.password, salt, null);
 
-    return { ...user, salt, hash };
+    return { username, salt, hash };
 });
 
 User.remove({}, function(err) {
