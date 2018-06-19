@@ -6,11 +6,11 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
-const { local } = require('./authstrategies');
+
+const authconfig = require('./authconfig');
+const db = require('./db');
 
 var authRouter = require('./routes/auth');
-
-require('./db/connect');
 
 var app = express();
 
@@ -24,26 +24,17 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'azzz', resave: false, saveUninitialized: false }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.serializeUser(function(user, done) {
-    done(null, user.username);
-});
-
-passport.deserializeUser(function(username, done) {
-    User.findOne({username}, function(err, user) {
-        done(err, user);
-    });
-});
-
-passport.use(local);
+db.init();
+authconfig.init();
 
 app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    console.log(req.path);
     next(createError(404));
 });
 

@@ -1,5 +1,5 @@
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('../db/models/User');
+const User = require('../db');
 
 module.exports = new LocalStrategy(function(username, password, done) {
     User.findOne({ username }, function(err, user) {
