@@ -1,17 +1,32 @@
-let User  = require('./models/User');
+const bcrypt = require('bcrypt-nodejs');
+let User = require('./models/User');
+
+let fakeUsers = [
+    { username: 'admin', password: 'admin' },
+    { username: 'john', password: 'pwd' },
+    { username: 'jack', password: 'pwd2' }
+].map(user => {
+    const salt = bcrypt.genSaltSync(8);
+
+    return {
+        ...user,
+        salt,
+        hash: bcrypt.hashSync(user.password, salt, null)
+    };
+});
 
 User.remove({}, function(err) {
     if (err) {
         console.error('[DB] users cleanup failed', err);
         throw err;
-    }
-});
-
-User.create({ username: 'admin' }, function (err) {
-    if (err) {
-        console.error('[DB] users seed failed', err);
-        throw err;
     } else {
-        console.log('[DB] users seed successful');
+        User.create(fakeUsers, function(err) {
+            if (err) {
+                console.error('[DB] users seed failed', err);
+                throw err;
+            } else {
+                console.log('[DB] users seed successful');
+            }
+        });
     }
 });
