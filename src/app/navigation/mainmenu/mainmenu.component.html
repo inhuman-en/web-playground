@@ -3,93 +3,42 @@
                  [class.main-menu__sidenav__expanded]="sidenavExpanded"
                  mode="side"
                  opened="true">
-        <mat-nav-list class="main-menu__sidenav__list">
-            <h4 mat-subheader>
-                <ng-container *ngIf="sidenavExpanded else headerCollapsed">
-                    Features
+        <mat-tree [dataSource]="dataSource"
+                  [treeControl]="treeControl"
+                  class="main-menu__sidenav__menu">
+            <mat-tree-node *matTreeNodeDef="let node"
+                           matTreeNodeToggle
+                           class="main-menu__sidenav__item-leaf">
+                <mat-icon *ngIf="!sidenavExpanded" class="main-menu__sidenav__menu__icon">
+                                {{node.icon}}
+                            </mat-icon>
+                <ng-container *ngIf="sidenavExpanded">
+                    {{node.itemName}}
                 </ng-container>
-            </h4>
-            <ng-template #headerCollapsed>
-                <mat-icon mat-list-icon>
-                    more_horiz
+
+                <button mat-icon-button
+                        disabled></button>
+            </mat-tree-node>
+
+            <mat-tree-node *matTreeNodeDef="let node;when: hasChild"
+                           [class.main-menu__sidenav__item-selected]="treeControl.isExpanded(node)">
+                <mat-icon class="main-menu__sidenav__menu__icon">
+                    {{node.icon}}
                 </mat-icon>
-            </ng-template>
-            <mat-list-item class="main-menu__sidenav__item-selected">
-                <a mat-line
-                   class="main-menu__sidenav__item-text">
-                    <mat-icon mat-list-icon>
-                        perm_identity
+                <ng-container *ngIf="sidenavExpanded">
+                    {{node.itemName}}
+                </ng-container>
+                <button mat-icon-button
+                        matTreeNodeToggle
+                        [attr.aria-label]="'toggle ' + node.itemName"
+                        class="main-menu__sidenav__menu__expand">
+                    <mat-icon class="mat-icon-rtl-mirror">
+                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                     </mat-icon>
-                    <span *ngIf="sidenavExpanded">Angular</span>
-                </a>
-            </mat-list-item>
-            <mat-list-item>
-                <a mat-line
-                   class="main-menu__sidenav__item-text">
-                    <mat-icon mat-list-icon>
-                        perm_identity
-                    </mat-icon>
-                    <span *ngIf="sidenavExpanded">Angular</span>
-                </a>
-            </mat-list-item>
-            <mat-list-item>
-                <a mat-line
-                   class="main-menu__sidenav__item-text">
-                    <mat-icon mat-list-icon>
-                        perm_identity
-                    </mat-icon>
-                    <span *ngIf="sidenavExpanded">Angular</span>
-                </a>
-            </mat-list-item>
-            <mat-list-item>
-                <a mat-line
-                   class="main-menu__sidenav__item-text">
-                    <mat-icon mat-list-icon>
-                        perm_identity
-                    </mat-icon>
-                    <span *ngIf="sidenavExpanded">Angular</span>
-                </a>
-            </mat-list-item>
-            <mat-list-item>
-                <a mat-line
-                   class="main-menu__sidenav__item-text">
-                    <mat-icon mat-list-icon>
-                        perm_identity
-                    </mat-icon>
-                    <span *ngIf="sidenavExpanded">Angular</span>
-                </a>
-            </mat-list-item>
+                </button>
+            </mat-tree-node>
+        </mat-tree>
 
-            <mat-list-item>
-                <a mat-line
-                   class="main-menu__sidenav__item-text">
-                    <mat-icon mat-list-icon>
-                        perm_identity
-                    </mat-icon>
-                    <span *ngIf="sidenavExpanded">Angular</span>
-                </a>
-            </mat-list-item>
-            <h4 mat-subheader>
-                    <ng-container *ngIf="sidenavExpanded else headerCollapsed">
-                        Features
-                    </ng-container>
-                </h4>
-                <ng-template #headerCollapsed>
-                    <mat-icon mat-list-icon>
-                        more_horiz
-                    </mat-icon>
-                </ng-template>
-                <mat-list-item>
-                    <a mat-line
-                       class="main-menu__sidenav__item-text">
-                        <mat-icon mat-list-icon>
-                            perm_identity
-                        </mat-icon>
-                        <span *ngIf="sidenavExpanded">Angular</span>
-                    </a>
-                </mat-list-item>
-
-        </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content [class.main-menu__sidenav-content-expanded]="!sidenavExpanded">
         <ng-content></ng-content>

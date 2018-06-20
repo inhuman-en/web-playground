@@ -11,24 +11,31 @@
     .main-menu {
         &__sidenav {
             background: darken($color: mat-color($primary), $amount: 8);
+            .mat-tree {
+                background: inherit;
 
-            .mat-nav-list .mat-list-item {
-                color: darken($color: $textColor, $amount: 12);
-                transition: color 200ms ease-in, background 200ms ease-in;
+                .mat-tree-node {
+                    color: darken($color: $textColor, $amount: 12);
+                    transition: color 200ms ease-in, background 200ms ease-in;
 
-                &:hover {
-                    color: $textColor;
-                    background: darken($color: mat-color($primary), $amount: 12);
-                }
-            }
+                    &.main-menu__sidenav__item-leaf {
+                        background: darken($color: mat-color($primary), $amount: 12);
+                    }
 
-            & .mat-nav-list &__item-selected {
-                background: $backgroundSelected;
-                color: $textColor;
+                    &:hover {
+                        color: $textColor;
+                        background: darken($color: mat-color($primary), $amount: 16);
+                    }
 
-                &:hover {
-                    color: $textColor;
-                    background: $backgroundSelected;
+                    &.main-menu__sidenav__item-selected {
+                        background: $backgroundSelected;
+                        color: $textColor;
+
+                        &:hover {
+                            color: $textColor;
+                            background: $backgroundSelected;
+                        }
+                    }
                 }
             }
 
