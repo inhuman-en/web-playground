@@ -4,8 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes, CanActivate } from '@angular/router';
 
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
-import { authReducer } from './store';
+import { authReducer, AuthEffects } from './store';
 
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
@@ -22,7 +23,8 @@ const routes: Routes = [{ path: 'login', component: LoginpageComponent}];
         SharedModule,
         FormsModule,
         RouterModule.forChild(routes),
-        StoreModule.forFeature('auth', authReducer)
+        StoreModule.forFeature('auth', authReducer),
+        EffectsModule.forRoot([AuthEffects])
     ],
     providers: [
         AuthService,

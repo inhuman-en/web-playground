@@ -55,20 +55,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     localLogin() {
-        const username: string = this.user.username;
-
         this.store.dispatch(new LoginAttempt(this.user));
-
-        this.auth
-            .login(this.user)
-            .subscribe((d) => {
-                console.info(`${username} successfully logged in!`, d);
-
-                this.store.dispatch(new LoginSuccess({ username: d.username }));
-                // TODO: success svg animation
-            }, (errorMessage) => {
-                console.warn(`failed to authenticate ${username}: ${errorMessage}`);
-                    this.store.dispatch(new LoginFailure(errorMessage));
-            });
     }
 }
