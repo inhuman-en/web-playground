@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,7 +16,18 @@ import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [CoreModule, NavigationModule, SharedModule, DashboardModule, AuthModule, AppRoutingModule],
+    imports: [
+        CoreModule,
+        NavigationModule,
+        SharedModule,
+        DashboardModule,
+        AuthModule,
+        AppRoutingModule,
+        StoreModule.forRoot({}),
+        StoreDevtoolsModule.instrument({
+            maxAge: 25
+        }),
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

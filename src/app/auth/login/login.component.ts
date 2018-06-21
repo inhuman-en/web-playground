@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
-import { of } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+
+import { LoginState } from '../auth.models';
+import { LoginAttempt, LoginSuccess, LoginFailure, getLoginErrorMessage, getLoginInProcess } from '../store';
 
 import { User } from '../user';
 import { AuthService } from '../auth.service';
@@ -19,9 +23,20 @@ export class LoginComponent implements OnInit {
 
     constructor(
         public auth: AuthService,
+        private store: Store<LoginState>
     ) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.store.pipe(select(getLoginErrorMessage))
+            .subscribe(message => {
+                this.errorMessage = message;
+            });
+
+        this.store.pipe(select(getLoginInProcess))
+            .subscribe(inProcess => {
+                this.loginInProcess = inProcess;
+            });
+    }
 
     googleLogin() {
         console.log('oauth');
@@ -30,21 +45,18 @@ export class LoginComponent implements OnInit {
     localLogin() {
         const username: string = this.user.username;
 
-        this.errorMessage = null;
-        this.loginInProcess = true;
+        this.store.dispatch(new LoginAttempt(this.user));
 
-        console.log(this.auth.uid);
         this.auth
             .login(this.user)
             .subscribe((d) => {
                 console.info(`${username} successfully logged in!`, d);
+
+                this.store.dispatch(new LoginSuccess({ username: d.username }));
                 // TODO: success svg animation
             }, (errorMessage) => {
                 console.warn(`failed to authenticate ${username}: ${errorMessage}`);
-                    this.errorMessage = errorMessage;
-                    this.loginInProcess = false;
-
-                    return of(null);
+                    this.store.dispatch(new LoginFailure(errorMessage));
             });
     }
 }
