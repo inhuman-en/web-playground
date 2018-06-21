@@ -9,15 +9,14 @@
             <mat-tree-node *matTreeNodeDef="let node"
                            matTreeNodeToggle
                            class="main-menu__sidenav__item-leaf">
-                <mat-icon *ngIf="!sidenavExpanded" class="main-menu__sidenav__menu__icon">
-                                {{node.icon}}
-                            </mat-icon>
-                <ng-container *ngIf="sidenavExpanded">
-                    {{node.itemName}}
-                </ng-container>
-
-                <button mat-icon-button
-                        disabled></button>
+                <a mat-button [routerLink]="node.link">
+                    <mat-icon class="main-menu__sidenav__menu__icon">
+                        {{node.icon}}
+                    </mat-icon>
+                    <ng-container *ngIf="sidenavExpanded">
+                        {{node.itemName}}
+                    </ng-container>
+                </a>
             </mat-tree-node>
 
             <mat-tree-node *matTreeNodeDef="let node;when: hasChild"
@@ -40,7 +39,8 @@
         </mat-tree>
 
     </mat-sidenav>
-    <mat-sidenav-content [class.main-menu__sidenav-content-expanded]="!sidenavExpanded">
+    <mat-sidenav-content class="main-menu__sidenav-content"
+                         [style.marginLeft]="sidenavExpanded ? '250px' : '50px' ">
         <ng-content></ng-content>
     </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
-import { MatDialogRef } from '../../material';
 import { of } from 'rxjs';
-import { catchError} from 'rxjs/operators';
 
 import { User } from '../user';
 import { AuthService } from '../auth.service';
@@ -21,8 +19,6 @@ export class LoginComponent implements OnInit {
 
     constructor(
         public auth: AuthService,
-        // TODO: separate form from dialog
-        public dialogRef: MatDialogRef<LoginComponent>
     ) {}
 
     ngOnInit() {}
@@ -42,11 +38,10 @@ export class LoginComponent implements OnInit {
             .login(this.user)
             .subscribe((d) => {
                 console.info(`${username} successfully logged in!`, d);
-                this.dialogRef.close();
                 // TODO: success svg animation
-            }, (error) => {
-                console.warn(`failed to authenticate ${username}: ${error.message}`);
-                    this.errorMessage = error.message;
+            }, (errorMessage) => {
+                console.warn(`failed to authenticate ${username}: ${errorMessage}`);
+                    this.errorMessage = errorMessage;
                     this.loginInProcess = false;
 
                     return of(null);

@@ -1,7 +1,8 @@
-<div *ngIf="loginInProcess" class="login-form__spinner">
-    <mat-spinner></mat-spinner>
-</div>
 <mat-card class="login-form">
+    <div *ngIf="loginInProcess"
+         class="login-form__spinner">
+        <mat-spinner></mat-spinner>
+    </div>
     <form #loginForm="ngForm"
           class="login-form__form">
         <button mat-raised-button
@@ -38,7 +39,6 @@
                 color="primary"
                 type="submit"
                 [disabled]="loginForm.invalid"
-                (click)="localLogin()"
-                >Sign in</button>
+                (click)="localLogin()">Sign in</button>
     </form>
 </mat-card>

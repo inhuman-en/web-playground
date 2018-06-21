@@ -31,7 +31,7 @@ export class MainmenuComponent implements OnInit {
 
     dataSource: MatTreeFlatDataSource<MenuNode, MenuFlatNode>;
 
-    sidenavExpanded = true;
+    sidenavExpanded = false;
 
     constructor() {
         this.treeFlattener = new MatTreeFlattener(
@@ -51,30 +51,39 @@ export class MainmenuComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.dataSource.data = [{
-            itemName: 'Angular',
-            link: '',
-            icon: 'spellcheck',
-            children: [
-                {
-                    itemName: 'Change detection',
-                    link: '',
-                    icon: 'spellcheck',
-                    children: []
-                },
-                {
-                    itemName: 'HTTP Interceptors',
-                    link: '',
-                    icon: 'spellcheck',
-                    children: []
-                },
-                {
-                    itemName: 'Reactive forms',
-                    link: '',
-                    icon: 'spellcheck',
-                    children: []
-                }
-            ]}];
+        this.dataSource.data = [
+            {
+                itemName: 'Dashboard',
+                link: 'dashboard',
+                icon: 'dashboard',
+                children: []
+            },
+            {
+                itemName: 'Angular',
+                link: '',
+                icon: 'spellcheck',
+                children: [
+                    {
+                        itemName: 'Change detection',
+                        link: '',
+                        icon: '',
+                        children: []
+                    },
+                    {
+                        itemName: 'HTTP Interceptors',
+                        link: '',
+                        icon: '',
+                        children: []
+                    },
+                    {
+                        itemName: 'Reactive forms',
+                        link: '',
+                        icon: '',
+                        children: []
+                    }
+                ]
+            }
+        ];
     }
 
     toggleSidenav() {

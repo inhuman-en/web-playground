@@ -9,7 +9,19 @@
                 cursor: pointer;
 
                 &.main-menu__sidenav__item-leaf {
-                    padding: 0 12px 0 12px;
+                    padding-left: 12px;
+
+                    & .mat-button {
+                        padding: 0;
+                        width: 100%;
+                        text-align: left;
+
+                        &:hover {
+                            .mat-button-focus-overlay {
+                                opacity: 0;
+                            }
+                        }
+                    }
                 }
 
                 .mat-icon {
@@ -23,17 +35,15 @@
         &__expanded {
             width: 250px;
 
-            .mat-tree .mat-tree-node {
-                &.main-menu__sidenav__item-leaf {
-                    padding-left: 52px;
-                }
-            }
+            // .mat-tree .mat-tree-node {
+            //     &.main-menu__sidenav__item-leaf {
+            //         padding-left: 52px;
+            //     }
+            // }
 
         }
-    }
 
-    &__sidenav-content-expanded {
-        margin-left: 50px !important;
+        transition: width 150ms ease;
     }
 
     height: calc(100vh - 48px);

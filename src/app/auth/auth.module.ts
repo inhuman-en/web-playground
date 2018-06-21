@@ -8,8 +8,9 @@ import { AuthService } from './auth.service';
 
 import { AuthGuard } from './auth.guard';
 import { SharedModule } from '../shared';
+import { LoginpageComponent } from './loginpage/loginpage.component';
 
-const routes: Routes = [];
+const routes: Routes = [{ path: 'login', component: LoginpageComponent}];
 
 @NgModule({
     imports: [CommonModule, SharedModule, FormsModule, RouterModule.forChild(routes)],
@@ -17,7 +18,7 @@ const routes: Routes = [];
         AuthService,
         AuthGuard
     ],
-    declarations: [LoginComponent],
+    declarations: [LoginComponent, LoginpageComponent],
     exports: [RouterModule, LoginComponent],
     entryComponents: [LoginComponent]
 })

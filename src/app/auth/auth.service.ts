@@ -13,11 +13,10 @@ export class AuthService {
     userDisplayMame = null;
     redirectTo: String = '/';
     uid: Number;
+
     constructor(private router: Router, private http: HttpClient) {
         this.uid = Math.random();
     }
-
-    validUser: User = new User('admin', '1');
 
     login(user: User) {
         console.log(`trying to login: ${user.username}, ${user.password}`);
@@ -25,8 +24,10 @@ export class AuthService {
         return this.http.post<User>(`/auth/signin`, user)
             .pipe(
                 catchError((response) => {
+                    const errorMessage: string = response.error.message || response.error;
+
                     this.authenticated = false;
-                    return throwError(response.error);
+                    return throwError(errorMessage);
                 }),
                 tap((userData) => {
                     this.authenticated = true;
