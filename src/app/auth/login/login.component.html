@@ -1,8 +1,4 @@
 <mat-card class="login-form">
-    <div *ngIf="loginInProcess"
-         class="login-form__spinner">
-        <mat-spinner></mat-spinner>
-    </div>
     <form #loginForm="ngForm"
           class="login-form__form">
         <button mat-raised-button
@@ -10,6 +6,7 @@
                 (click)="googleLogin()">
             <img src="assets/google_logo.png"
                  alt="Google logo"> Sign in with Google</button>
+
         <mat-error *ngIf="errorMessage"
                    class="error-message login-form__error-message">
             {{errorMessage}}
@@ -35,7 +32,11 @@
             Don't have an account?
             <a routerLink="/signup">Sign up</a>
         </div>
-        <button mat-raised-button
+        <div *ngIf="loginInProcess" class="login-form__spinner">
+            <mat-progress-bar mode="indeterminate">
+            </mat-progress-bar>
+        </div>
+        <button *ngIf="!loginInProcess" mat-raised-button
                 color="primary"
                 type="submit"
                 [disabled]="loginForm.invalid"

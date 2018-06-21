@@ -11,6 +11,7 @@ import {
     MatListModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     MatTreeModule
 } from '@angular/material';
 
@@ -26,6 +27,7 @@ const COMPONENT_MODULES = [
     MatListModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     MatTreeModule,
 ];
 
