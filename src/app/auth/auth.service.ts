@@ -8,8 +8,6 @@ import { User } from './user';
 
 @Injectable()
 export class AuthService {
-    authenticated: Boolean = false;
-    userDisplayMame = null;
     redirectTo: String = '/';
     uid: Number;
 
@@ -25,19 +23,15 @@ export class AuthService {
                 catchError((response) => {
                     const errorMessage: string = response.error.message || response.error;
 
-                    this.authenticated = false;
                     return throwError(errorMessage);
                 }),
                 tap((userData) => {
-                    this.authenticated = true;
-                    this.userDisplayMame = userData.username;
                     return of(userData);
                 })
             );
     }
 
     logout() {
-        this.authenticated = false;
         this.router.navigate(['/login']);
     }
 }

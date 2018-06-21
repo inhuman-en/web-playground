@@ -8,6 +8,11 @@ export const getLoginErrorMessage = createSelector(
     (state: AuthState) => state.errorMessage
 );
 
+export const getIsAuthenticated = createSelector(
+    selectAuthState,
+    (state: AuthState) => state.authenticated
+);
+
 export const getLoginInProcess = createSelector(
     selectAuthState,
     (state: AuthState) => state.loginInProcess
