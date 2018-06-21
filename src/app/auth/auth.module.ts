@@ -5,7 +5,7 @@ import { RouterModule, Routes, CanActivate } from '@angular/router';
 
 import { StoreModule } from '@ngrx/store';
 
-import { loginReducer } from './store';
+import { authReducer } from './store';
 
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
@@ -22,7 +22,7 @@ const routes: Routes = [{ path: 'login', component: LoginpageComponent}];
         SharedModule,
         FormsModule,
         RouterModule.forChild(routes),
-        StoreModule.forFeature('login', loginReducer)
+        StoreModule.forFeature('auth', authReducer)
     ],
     providers: [
         AuthService,

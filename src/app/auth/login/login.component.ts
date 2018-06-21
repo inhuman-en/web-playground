@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { Observable, Subscription, of, merge } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
-import { LoginState } from '../auth.models';
+import { AuthState } from '../auth.models';
 import { LoginAttempt, LoginSuccess, LoginFailure, getLoginErrorMessage, getLoginInProcess } from '../store';
 
 import { User } from '../user';
@@ -14,28 +15,39 @@ import { AuthService } from '../auth.service';
     styleUrls: ['./login.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
     @Output() loginSuccess: EventEmitter<string> = new EventEmitter<string>();
 
     user = new User();
     errorMessage: string;
     loginInProcess = false;
 
+    subscription: Subscription;
+
     constructor(
         public auth: AuthService,
-        private store: Store<LoginState>
+        private store: Store<AuthState>
     ) {}
 
     ngOnInit() {
-        this.store.pipe(select(getLoginErrorMessage))
-            .subscribe(message => {
-                this.errorMessage = message;
-            });
+        this.subscription = merge(
+            this.store.pipe(
+                select(getLoginErrorMessage),
+                tap(message => {
+                    this.errorMessage = message;
+                })
+            ),
+            this.store.pipe(
+                select(getLoginInProcess),
+                tap(inProcess => {
+                    this.loginInProcess = inProcess;
+                })
+            )
+        ).subscribe(() => {});
+    }
 
-        this.store.pipe(select(getLoginInProcess))
-            .subscribe(inProcess => {
-                this.loginInProcess = inProcess;
-            });
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 
     googleLogin() {

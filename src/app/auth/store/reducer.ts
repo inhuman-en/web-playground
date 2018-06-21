@@ -1,12 +1,12 @@
 import { LoginActionTypes, LoginAction } from './actions';
-import { LoginState, UserInfo } from '../auth.models';
+import { AuthState, UserInfo } from '../auth.models';
 
-const initialState: LoginState = {
+const initialState: AuthState = {
     authenticated: false,
     loginInProcess: false
 };
 
-export function loginReducer(state: LoginState = initialState, action: LoginAction): LoginState {
+export function authReducer(state: AuthState = initialState, action: LoginAction): AuthState {
     switch (action.type) {
         case LoginActionTypes.LOGIN_ATTEMPT: {
             return { ...state, loginInProcess: true };

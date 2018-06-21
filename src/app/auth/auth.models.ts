@@ -2,7 +2,7 @@ export interface UserInfo {
     username: string;
 }
 
-export interface LoginState {
+export interface AuthState {
     authenticated: boolean;
     loginInProcess: boolean;
     userInfo?: UserInfo;
