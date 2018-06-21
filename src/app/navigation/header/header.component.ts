@@ -1,7 +1,9 @@
-import { Component, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { AuthService } from '../../core';
-import { MatDialog } from '../../material';
-import { LoginComponent } from '../../auth';
+import { Component, OnInit, Output, EventEmitter, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
+
+import { AuthService, AuthState, UserInfo, getUserInfo } from '../../core';
 
 @Component({
     selector: 'wpl-header',
@@ -9,32 +11,28 @@ import { LoginComponent } from '../../auth';
     styleUrls: ['./header.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
     @Output() sidenavOpened: EventEmitter<void> = new EventEmitter<void>();
 
-    loginVisible = false;
+    subscription: Subscription;
+    userInfo: UserInfo;
 
-    constructor(public authService: AuthService, private dialogService: MatDialog) {}
+    constructor(public authService: AuthService, private store: Store<any>) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.subscription = this.store.pipe(
+            select(getUserInfo),
+            tap((info: UserInfo) => {
+                this.userInfo = info;
+            })
+        ).subscribe(() => {});
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
 
     onSidenavButtonClick() {
         this.sidenavOpened.emit();
-    }
-
-    showLoginForm() {
-
-        if (this.loginVisible) {
-            return;
-        }
-
-        this.loginVisible = true;
-
-        const dialogRef = this.dialogService.open(LoginComponent, {
-            hasBackdrop: false,
-            panelClass: 'login-panel'
-        });
-
-        dialogRef.afterClosed().subscribe(() => this.loginVisible = false);
     }
 }

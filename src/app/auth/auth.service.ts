@@ -9,7 +9,6 @@ import { User } from './user';
 @Injectable()
 export class AuthService {
     authenticated: Boolean = false;
-    // TODO: separate models for user and userInfo
     userDisplayMame = null;
     redirectTo: String = '/';
     uid: Number;

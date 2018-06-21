@@ -24,7 +24,7 @@
         </mat-icon>
     </a>
     <span class="fill-space"></span>
-    <ng-container *ngIf="!authService.authenticated else autheticatedBlock">
+    <ng-container *ngIf="!userInfo else autheticatedBlock">
         <a mat-button routerLink="login">
             <mat-icon>
                 perm_identity
@@ -38,7 +38,7 @@
             <mat-icon>
                 account_circle
             </mat-icon>
-            {{authService.userDisplayMame}}
+            {{userInfo.username}}
             <mat-icon class="header__toolbar__account-button-icon">
                 keyboard_arrow_down
             </mat-icon>
