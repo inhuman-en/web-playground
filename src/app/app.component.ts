@@ -8,4 +8,9 @@ import { MatSidenav } from './shared';
     encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
+
+    /**
+     *
+     */
+    constructor() {}
 }

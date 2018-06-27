@@ -1,18 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { of, throwError } from 'rxjs';
+import { of, throwError, Observable, Subscription } from 'rxjs';
 import { catchError, tap} from 'rxjs/operators';
 
 import { User } from './user';
+import { SessionExpiationService } from './session-expiation.service';
 
 @Injectable()
 export class AuthService {
-    redirectTo: String = '/';
-    uid: Number;
+    public redirectTo: String = '/dashboard';
+    public uid: Number;
 
-    constructor(private router: Router, private http: HttpClient) {
+    private sessionExpiration$: Observable<number>;
+    private subscription: Subscription;
+
+    constructor(
+        private router: Router,
+        private timeoutService: SessionExpiationService,
+        private http: HttpClient
+    ) {
         this.uid = Math.random();
+        this.sessionExpiration$ = this.timeoutService.trackUser();
     }
 
     login(user: User) {
@@ -27,11 +36,18 @@ export class AuthService {
                 }),
                 tap((userData) => {
                     return of(userData);
+                }),
+                tap(() => {
+                    this.router.navigate([this.redirectTo]);
+                }),
+                tap(() => {
+                    this.subscription = this.sessionExpiration$.subscribe(this.logout.bind(this));
                 })
             );
     }
 
     logout() {
+        this.subscription.unsubscribe();
         this.router.navigate(['/login']);
     }
 }

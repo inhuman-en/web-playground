@@ -14,6 +14,7 @@ import { SharedModule } from '../shared';
 
 import { LoginComponent } from './login/login.component';
 import { LoginpageComponent } from './loginpage/loginpage.component';
+import { SessionExpiationService } from './session-expiation.service';
 
 const routes: Routes = [{ path: 'login', component: LoginpageComponent}];
 
@@ -28,7 +29,8 @@ const routes: Routes = [{ path: 'login', component: LoginpageComponent}];
     ],
     providers: [
         AuthService,
-        AuthGuard
+        AuthGuard,
+        SessionExpiationService
     ],
     declarations: [LoginComponent, LoginpageComponent],
     exports: [RouterModule, LoginComponent],
