@@ -1,0 +1,19 @@
+.dashboard__grid {
+    .mat-grid-tile {
+        .mat-figure {
+            padding: 10px;
+            box-sizing: border-box;
+        }
+    }
+
+    .mat-card {
+        height: calc(100% - 3px);
+        box-sizing: border-box;
+        // overflow-y: auto;
+
+        .mat-card-content {
+            max-height: 275px;
+            overflow-y: auto;
+        }
+    }
+}

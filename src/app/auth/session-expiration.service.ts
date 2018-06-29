@@ -5,7 +5,7 @@ import { tap, switchMapTo, take, takeUntil, debounceTime } from 'rxjs/operators'
 @Injectable()
 export class SessionExpirationService {
 
-    private readonly EXPIRATION_TIMEOUT: number = 30000;
+    private readonly EXPIRATION_TIMEOUT: number = 600000;
 
     private readonly NOTIFICATION_TIMEOUT: number = 1000;
 
