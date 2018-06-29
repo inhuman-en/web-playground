@@ -4,4 +4,4 @@ export * from './auth.guard';
 export * from './auth.models';
 export * from './store';
 export * from './login/login.component';
-export * from './session-expiation.service';
+export * from './session-expiration.service';

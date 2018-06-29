@@ -3,7 +3,7 @@ import { Observable, timer, pipe, fromEvent } from 'rxjs';
 import { tap, switchMapTo, take, takeUntil, debounceTime } from 'rxjs/operators';
 
 @Injectable()
-export class SessionExpiationService {
+export class SessionExpirationService {
 
     private readonly EXPIRATION_TIMEOUT: number = 30000;
 
@@ -17,7 +17,7 @@ export class SessionExpiationService {
      * trackUser
      */
     public trackUser(): Observable<number> {
-        return this.userIsInactive().pipe(
+        return this.userIsActive().pipe(
                 debounceTime(this.EXPIRATION_TIMEOUT),
                 switchMapTo(this.expirationStart())
             );
@@ -32,7 +32,7 @@ export class SessionExpiationService {
                 }),
                 switchMapTo(
                     timer(this.LOGOUT_TIMEOUT).pipe(
-                        takeUntil(this.userIsInactive()),
+                        takeUntil(this.userIsActive()),
                         tap(() => {
                             console.log(Date.now(), 'logging out..');
                         })
@@ -42,7 +42,7 @@ export class SessionExpiationService {
             );
     }
 
-    private userIsInactive(): Observable<Event> {
+    private userIsActive(): Observable<Event> {
         return fromEvent(document, 'mousemove');
     }
 }

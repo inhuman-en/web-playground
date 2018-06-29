@@ -5,7 +5,7 @@ import { of, throwError, Observable, Subscription } from 'rxjs';
 import { catchError, tap} from 'rxjs/operators';
 
 import { User } from './user';
-import { SessionExpiationService } from './session-expiation.service';
+import { SessionExpirationService } from './session-expiration.service';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +17,7 @@ export class AuthService {
 
     constructor(
         private router: Router,
-        private timeoutService: SessionExpiationService,
+        private timeoutService: SessionExpirationService,
         private http: HttpClient
     ) {
         this.uid = Math.random();
