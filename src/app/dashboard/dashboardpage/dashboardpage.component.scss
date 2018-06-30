@@ -1,19 +1,12 @@
-.dashboard__grid {
-    .mat-grid-tile {
-        .mat-figure {
-            padding: 10px;
-            box-sizing: border-box;
-        }
-    }
+.dashboard__wrap {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    padding: 20px;
 
-    .mat-card {
-        height: calc(100% - 3px);
-        box-sizing: border-box;
-        // overflow-y: auto;
-
-        .mat-card-content {
-            max-height: 275px;
-            overflow-y: auto;
-        }
+    @media (max-width: 768px) {
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr;
     }
 }
